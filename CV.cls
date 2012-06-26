@@ -68,11 +68,11 @@
 \newcommand{\CV@initLength}{
 	\setlength{\scolwidth}{\textwidth}
 	\addtolength{\scolwidth}{-\colwidth}
-	\addtolength{\scolwidth}{-8.72mm}		% Je ne comprends pas d'où vient cette dimension, mais ça marche bien...
+	\addtolength{\scolwidth}{-8.72mm}		
 
 	\setlength{\mcolwidth}{\colwidth}
 	\addtolength{\mcolwidth}{\scolwidth}
-	\addtolength{\mcolwidth}{4.36mm}		% Idem (si ce n'est que c'est la moitié de la première)
+	\addtolength{\mcolwidth}{4.36mm}		
 
 	\setlength{\cmedskip}{\medskipamount}
 	\addtolength{\cmedskip}{-\smallskipamount}
@@ -124,13 +124,33 @@
 	\global\def\CV@delayed{}
 
 	\CV@AppendItem{
-		\hspace*{\tabcolsep}
+		%\hspace*{\tabcolsep}
 		\begin{minipage}{0.5\linewidth}
 		\vspace{-\baselineskip}		% Mais pourquoi ?
 	}{\CV@delayed}
 
 	\ifx\@@name\empty\else
 		\CV@AppendItem{{\large \@@name}\newline}{\CV@delayed}
+	\fi
+	
+	\ifx\@@dateofbirth\empty\else
+		\ifthenelse{\equal{\@@language}{francais}}{
+			\ifthenelse{\equal{\@@gender}{M}}{
+				\CV@AppendItem{Né le }{\CV@delayed}
+			}{
+				\CV@AppendItem{Née le }{\CV@delayed}
+			}
+			\CV@AppendItem{\@@dateofbirth}{\CV@delayed}
+			\ifx\@@age\empty\else
+				\CV@AppendItem{ (\@@age{} ans)}{\CV@delayed}
+			\fi
+		}{}
+		\ifthenelse{\equal{\@@language}{english}}{
+			\CV@AppendItem{Date of birth: \@@dateofbirth}{\CV@delayed}
+			\ifx\@@age\empty\else
+				\CV@AppendItem{ (\@@age{} year old)}{\CV@delayed}
+			\fi
+		}{}
 	\fi
 
 	\ifx\@@address\empty\else
@@ -160,26 +180,6 @@
 		\begin{minipage}{0.3\linewidth}
 %			\vspace{\baselineskip}
 	}{\CV@delayed}
-
-	\ifx\@@dateofbirth\empty\else
-		\ifthenelse{\equal{\@@language}{francais}}{
-			\ifthenelse{\equal{\@@gender}{M}}{
-				\CV@AppendItem{Né le }{\CV@delayed}
-			}{
-				\CV@AppendItem{Née le }{\CV@delayed}
-			}
-			\CV@AppendItem{\@@dateofbirth}{\CV@delayed}
-			\ifx\@@age\empty\else
-				\CV@AppendItem{ (\@@age{} ans)}{\CV@delayed}
-			\fi
-		}{}
-		\ifthenelse{\equal{\@@language}{english}}{
-			\CV@AppendItem{Date of birth: \@@dateofbirth}{\CV@delayed}
-			\ifx\@@age\empty\else
-				\CV@AppendItem{ (\@@age{} year old)}{\CV@delayed}
-			\fi
-		}{}
-	\fi
 
 	\ifx\@@nationality\empty\else
 		\ifthenelse{\equal{\@@language}{francais}}{
