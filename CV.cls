@@ -136,9 +136,9 @@
 	\ifx\@@dateofbirth\empty\else
 		\ifthenelse{\equal{\@@language}{francais}}{
 			\ifthenelse{\equal{\@@gender}{M}}{
-				\CV@AppendItem{Né le }{\CV@delayed}
+				\CV@AppendItem{NÃ© le }{\CV@delayed}
 			}{
-				\CV@AppendItem{Née le }{\CV@delayed}
+				\CV@AppendItem{NÃ©e le }{\CV@delayed}
 			}
 			\CV@AppendItem{\@@dateofbirth}{\CV@delayed}
 			\ifx\@@age\empty\else
@@ -159,7 +159,7 @@
 
 	\ifx\@@telephone\empty\else
 		\ifthenelse{\equal{\@@language}{francais}}{
-			\CV@AppendItem{Tél.~: \@@telephone\newline}{\CV@delayed}
+			\CV@AppendItem{TÃ©l.~: \@@telephone\newline}{\CV@delayed}
 		}{}
 		\ifthenelse{\equal{\@@language}{english}}{
 			\CV@AppendItem{Phone: \@@telephone\newline}{\CV@delayed}
@@ -183,7 +183,7 @@
 
 	\ifx\@@nationality\empty\else
 		\ifthenelse{\equal{\@@language}{francais}}{
-			\CV@AppendItem{\newline{}Nationalité \@@nationality}{\CV@delayed}
+			\CV@AppendItem{\newline{}NationalitÃ© \@@nationality}{\CV@delayed}
 		}{}
 		\ifthenelse{\equal{\@@language}{english}}{
 			\CV@AppendItem{\newline{}Nationality: \@@nationality}{\CV@delayed}
