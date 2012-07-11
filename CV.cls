@@ -21,6 +21,8 @@
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 
+\usepackage[utf8]{inputenc}
+
 \pagestyle{empty}
 \parindent=0pt
 
