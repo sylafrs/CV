@@ -269,7 +269,8 @@
 			\CV@AppendItem{\newline}{\@@activities}
 		\fi
 	
-		\CV@AppendItem{#2.}{\@@activities}
+%		\CV@AppendItem{#2.}{\@@activities}
+		\CV@AppendItem{#2}{\@@activities}
 	}{}
 }
 
@@ -279,20 +280,23 @@
 			\CV@AppendItem{\newline}{\@@events}
 		\fi
 	
-		\CV@AppendItem{#2.}{\@@events}
+%		\CV@AppendItem{#2.}{\@@events}
+		\CV@AppendItem{#2}{\@@events}
 	}{}
 }
 
 \newcommand{\CV@add@course}[1]{
 	\ifthenelse{\equal{\@@detailed}{1}}{
-		\CV@AppendItem{\ensuremath{\triangleright}~#1. }{\@@courses}
+		%\CV@AppendItem{\ensuremath{\triangleright}~#1. }{\@@courses}
+		\CV@AppendItem{\ensuremath{\triangleright}~#1 }{\@@courses}
 	}{}
 }
 
 \newcommand{\singleEntry}[2][1]{
 	\ifthenelse{\equal{\@@detailed}{1} \or \equal{#1}{1}}{
 		\\\kill
-		\multicolumn{2}{p{\mcolwidth}}{#2.}\\
+		%\multicolumn{2}{p{\mcolwidth}}{#2.}\\
+		\multicolumn{2}{p{\mcolwidth}}{#2}\\
 	}{}
 %	\\[\ssmallskip]
 }
@@ -360,7 +364,7 @@
 			\ifx\@@country\empty\else
 				\CV@AppendItem{, \@@country}{\CV@delayed}
 			\fi
-			\CV@AppendItem{.}{\CV@delayed}
+			%\CV@AppendItem{.}{\CV@delayed}
 	
 			\ifthenelse{\equal{\@@activities}{\empty} \and \equal{\@@events}{\empty} \and \equal{\@@courses}{\empty}}{}{
 				\CV@AppendItem{\newline}{\CV@delayed}
