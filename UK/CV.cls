@@ -60,6 +60,7 @@
 	\global\def\@@detailed{#1}
 }
 
+\newlength{\finishentrylen}
 \newlength{\scolwidth}
 \newlength{\mcolwidth}
 \newlength{\cmedskip}
@@ -67,14 +68,16 @@
 \newlength{\smedskip}
 \newlength{\ssmallskip}
 
-\newcommand{\CV@initLength}{
+\newcommand{\CV@initLength}{	
+	%\setlength{\finishentrylen}{0mm}
+
 	\setlength{\scolwidth}{\textwidth}
 	\addtolength{\scolwidth}{-\colwidth}
 	\addtolength{\scolwidth}{-8.72mm}		
 
 	\setlength{\mcolwidth}{\colwidth}
 	\addtolength{\mcolwidth}{\scolwidth}
-	\addtolength{\mcolwidth}{4.36mm}		
+	\addtolength{\mcolwidth}{4.6mm}		
 
 	\setlength{\cmedskip}{\medskipamount}
 	\addtolength{\cmedskip}{-\smallskipamount}
@@ -82,8 +85,10 @@
 
 	\setlength{\sbigskip}{\bigskipamount}
 	\addtolength{\sbigskip}{-\baselineskip}
+	
 	\setlength{\smedskip}{\medskipamount}
 	\addtolength{\smedskip}{-\baselineskip}
+	
 	\setlength{\ssmallskip}{\smallskipamount}
 	\addtolength{\ssmallskip}{-\baselineskip}
 }
@@ -269,8 +274,7 @@
 			\CV@AppendItem{\newline}{\@@activities}
 		\fi
 	
-%		\CV@AppendItem{#2.}{\@@activities}
-		\CV@AppendItem{#2}{\@@activities}
+		\CV@AppendItem{#2.}{\@@activities}
 	}{}
 }
 
@@ -280,23 +284,20 @@
 			\CV@AppendItem{\newline}{\@@events}
 		\fi
 	
-%		\CV@AppendItem{#2.}{\@@events}
-		\CV@AppendItem{#2}{\@@events}
+		\CV@AppendItem{#2.}{\@@events}
 	}{}
 }
 
 \newcommand{\CV@add@course}[1]{
 	\ifthenelse{\equal{\@@detailed}{1}}{
-		%\CV@AppendItem{\ensuremath{\triangleright}~#1. }{\@@courses}
-		\CV@AppendItem{\ensuremath{\triangleright}~#1 }{\@@courses}
+		\CV@AppendItem{\ensuremath{\triangleright}~#1. }{\@@courses}
 	}{}
 }
 
 \newcommand{\singleEntry}[2][1]{
 	\ifthenelse{\equal{\@@detailed}{1} \or \equal{#1}{1}}{
 		\\\kill
-		%\multicolumn{2}{p{\mcolwidth}}{#2.}\\
-		\multicolumn{2}{p{\mcolwidth}}{#2}\\
+		\multicolumn{2}{p{\mcolwidth}}{#2.}\\
 	}{}
 %	\\[\ssmallskip]
 }
@@ -315,7 +316,7 @@
 
 \newenvironment{entry}[1][1]{
 	\global\def\@@detail{#1}
-
+	
 	\CV@init{date}
 	\CV@init{duration}
 	\CV@init{skill}
@@ -325,6 +326,7 @@
 	\CV@init{activities}
 	\CV@init{events}
 	\CV@init{courses}
+					
 	\newcommand{\Date}[1]{\global\def\@@date{##1}}
 	\newcommand{\Duration}[1]{\global\def\@@duration{##1}}
 	\newcommand{\Skill}[1]{\global\def\@@skill{##1}}
@@ -357,14 +359,14 @@
 		\CV@AppendItem{&}{\CV@delayed}
 	
 		\ifx\@@place\empty\else
-			\CV@AppendItem{\textsc{\@@place}}{\CV@delayed}
+			\CV@AppendItem{\textbf{\textsc{\@@place}}}{\CV@delayed}
 			\ifx\@@locality\empty\else
 				\CV@AppendItem{, \@@locality}{\CV@delayed}
 			\fi
 			\ifx\@@country\empty\else
 				\CV@AppendItem{, \@@country}{\CV@delayed}
 			\fi
-			%\CV@AppendItem{.}{\CV@delayed}
+			\CV@AppendItem{.}{\CV@delayed}
 	
 			\ifthenelse{\equal{\@@activities}{\empty} \and \equal{\@@events}{\empty} \and \equal{\@@courses}{\empty}}{}{
 				\CV@AppendItem{\newline}{\CV@delayed}
@@ -391,7 +393,7 @@
 			\CV@AppendItem{\textit{\@@courses}}{\CV@delayed}
 		\fi
 	
-		\CV@AppendItem{\\[\smallskipamount]}{\CV@delayed}
+		\CV@AppendItem{\\\\[-3mm]}{\CV@delayed}
 	}{}
 
 	\aftergroup\CV@delayed
